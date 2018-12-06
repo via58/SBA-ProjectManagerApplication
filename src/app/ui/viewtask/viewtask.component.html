@@ -1,0 +1,48 @@
+<hr>
+<div class="container">
+  <!-- First Row -->
+  <div class="form-group form-inline">
+    <label for="projectNameSearch">Project :</label>
+    <input type="text" class="form-control" id="projectNameSearch" placeholder="Project name">
+    <label for="">Sort task By :</label>
+    <button type="" class="btn btn-primary">Start date</button>
+    <button type="" class="btn btn-primary">End date</button>
+    <button type="" class="btn btn-primary">Priority</button>
+    <button type="" class="btn btn-primary">Completed</button>
+  </div>
+  <hr style="border-top:dotted 1px" />
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Parent</th>
+        <th>Priority</th>
+        <th>start date</th>
+        <th>End date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <!-- <label>{{task.task}}</label> -->
+          <label>Task</label>
+        </td>
+        <td>
+          <!-- <label>{{task.parent_task}}</label> -->
+          <label>Parent task</label>
+        </td>
+        <td>1</td>
+        <td>2018-12-01</td>
+        <td>2018-12-07</td>
+        <td>
+          <button type="button" class="btn btn-default" (click)='handleUpdate(task.task_id)'>Edit</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-default" (click)='removeTask(task.task_id)'>End Task</button>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

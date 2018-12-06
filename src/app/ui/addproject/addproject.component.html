@@ -1,0 +1,35 @@
+<hr>
+<div class="container">
+  <form #newProject="ngForm" (ngSubmit)="handlesubmit()" role="form">
+    {{newProject.value |json}}
+    <div class="form-group form-inline">
+      <label for="txtproject" class="col10">Project</label>
+      <input type="text" class="form-control col70" id="txtproject" placeholder="Project Name" name="projectname" [(ngModel)]='projectname'
+        required>
+    </div>
+    <div class="form-group form-inline ">
+      <input type="checkbox" ng-model="date">
+      <label for="">Set Start and End date </label>
+      <input type="date" class="form-control" id="pstart" placeholder="Start date" name="startdate" [(ngModel)]='startdate' required>
+      <input type="date" class="form-control" id="pend" placeholder="End date" name="enddate" [(ngModel)]='enddate' required>
+    </div>
+    <div class="form-group form-inline ">
+      <label class="col10" for="">Priority</label>
+      <span>{{newProject.value.priority}}</span>
+      <input type="range" class="form-control col70" name='priority'
+       value="0" min="0" max="30" id="" placeholder="Project Name" [(ngModel)]='priority' required>
+    </div>
+    <div class="form-group form-inline">
+      <label for="" class="col10">Manager</label>
+      <input type="text" class="form-control col70" id="" placeholder="Manager"
+      name='Manager' [(ngModel)]='Manager' required>
+    </div>
+    <div class="form-group form-inline">
+      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </div>
+
+  </form>
+  <hr>
+  <app-viewproject></app-viewproject>
+</div>

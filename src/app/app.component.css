@@ -1,0 +1,10 @@
+nav a{
+    
+    text-decoration: none;
+    margin-left: 1%;
+    font-size: large;
+    font-weight: bold;    
+}
+.active-link{
+    color:blue;
+}

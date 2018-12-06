@@ -1,0 +1,28 @@
+<hr>
+<div class="container">
+    <form #newUser="ngForm" (ngSubmit)="handlesubmit()" role="form">
+      {{newUser.value |json}}
+      <div class="form-group form-inline">
+        <label for="fname" class="col10">First Name :</label>
+        <input type="text" class="form-control col70" id="fname" placeholder="First Name" name="fname" [(ngModel)]='fname'
+          required>
+      </div>
+      <div class="form-group form-inline">
+        <label for="" class="col10">Last Name :</label>
+        <input type="text" class="form-control col70" id="" placeholder="Last Name"
+        name='lname' [(ngModel)]='lname' required>
+      </div>
+      <div class="form-group form-inline">
+          <label for="associate" class="col10">Associate Id :</label>
+          <input type="text" class="form-control col20" id="" placeholder="Associate id"
+          name='associate' [(ngModel)]='associate' required>
+        </div>
+      <div class="form-group form-inline">
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="reset" class="btn btn-primary">Reset</button>
+      </div>
+  
+    </form>
+    <hr>
+    <app-viewusers></app-viewusers>
+  </div>

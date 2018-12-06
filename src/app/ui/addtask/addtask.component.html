@@ -1,0 +1,46 @@
+<div class="container">
+  <form #newTaskDetails="ngForm" (ngSubmit)="handlesubmit()">
+    <hr />
+    <div class="form-group form-inline ">
+      <label for="project" class="col10">Project :</label>
+      <input type="text" class="form-control col70 " id="project" name="project" [(ngModel)]="project" required>
+    </div>
+    <div class="form-group form-inline ">
+      <label for="task" class="col10">Task :</label>
+      <input type="text" class="form-control col70 " id="task" name="task" [(ngModel)]="task" required>
+    </div>
+    <div class="form-group form-inline ">
+      <input type="checkbox">
+      <label for="">Parent task </label>
+    </div>
+    <div class="form-group form-inline ">
+      <label for="C_priority" class="col10">Priority:</label>
+      <input type="range" class="form-control col70" id="C_priority" min="0" max="30" name="C_priority" [(ngModel)]="tasks.C_priority"
+        required>
+      <span>
+        {{newTaskDetails.value.C_priority}}
+      </span>
+    </div>
+    <div class="form-group form-inline">
+      <label for="parent_task" class="col10">Parent Task</label>
+      <input type="text" class="form-control col70" id="parent_task" name="parent_task" [(ngModel)]="tasks.parent_task" required>
+    </div>
+    <div class="form-group form-inline">
+      <label for="C_start_date" class="col10">Start date</label>
+      <input type="date" class="form-control" id="C_start_date" name="C_start_date" [(ngModel)]="tasks.C_start_date" required>
+      <label for="C_end_date" class="col10">End date</label>
+      <input type="date" class="form-control" id="C_end_date" name="C_end_date" [(ngModel)]="tasks.C_end_date" required>
+    </div>
+
+    <div class="form-group form-inline">
+        <label for="user" class="col10">User</label>
+        <input type="text" class="form-control col70" id="user" name="user" [(ngModel)]="tasks.parent_task" required>
+      </div>
+
+    <div class="form-group" id="btndivision">
+      <button type="submit" routerLink="/ViewTask" class="btn btn-default">Add Task</button>
+      <button type="reset" class="btn btn-default">Cancel</button>
+    </div>
+
+  </form>
+</div>
