@@ -17,3 +17,9 @@ form div button{
     margin: 1%;
     
 }
+.btn{
+    width:80px;
+}
+#btnupdate{
+    display: none;
+}

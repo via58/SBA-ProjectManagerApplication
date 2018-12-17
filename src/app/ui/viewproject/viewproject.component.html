@@ -1,3 +1,62 @@
-<p>
-  viewproject works!
-</p>
+<input id='searchTab' type="text" name="searchProjectName" [(ngModel)]='searchProjectName' class="form-control col70 searchTab"  placeholder="Search By Project...">
+<div class="form-group form-inline">
+  <label  for="">Sort</label>
+  <button type="" name='sortStartDate' (click)='toggleswitch(0)'  class="btn btn-primary">Start Date</button>
+  <button type="" name='sortEndDate' (click)='toggleswitch(1)' class="btn btn-primary">End Date</button>
+  <button type="" name='sortPriority' (click)='toggleswitch(2)'  class="btn btn-primary">Priority</button>
+  <button type="" name='sortCompleted' (click)='toggleswitch(3)'  class="btn btn-primary">Completed</button>
+ 
+</div>
+<hr>
+<div id='ProjectDisplayDiv' class="form-inline row" *ngFor='let x of projectContainer | projectfilter:searchProjectName |projectsort:sortStartDate:sortEndDate:sortPriority:sortCompleted'>
+  <div class="col-sm-8">
+      <table class="col-sm-12" >
+          <tr>
+              <th>Project:</th>
+              <td>{{x.project}}</td>
+          </tr>
+          <tr>
+              <th>No. of Tasks:</th>
+              <td>{{x.noOfTasks}}</td>
+              <th>{{x.status}}:</th>
+              <td>{{x.completed}}</td>
+          </tr>
+          <tr>
+              <th>Start Date:</th>
+              <td>{{x.start_Date}}</td>
+              <th>End Date:</th>
+              <td>{{x.end_Date}}</td>
+          </tr>
+      </table>
+  </div>
+  <div class="col-sm-2" style="text-align:center" >
+      <label class="form-label"style="width:100%">Priority</label>
+      <label style="background-color: rgb(219, 208, 208);height:50px;width:80px" class="form-control">{{x.priority}}</label>
+  </div>
+  <div class="col-sm-2"  >
+      <button type="submit" (click)='HandleUpdate(x)' class="btn btn-primary">Update</button>
+      <input type="button" class="btn btn-secondary" data-toggle="modal" href='#modal-suspend' value="Suspend">
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-suspend">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <h4>Are you Sure want to suspend this Project ?</h4>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="No">
+                <input type="button" class="btn btn-primary" data-dismiss="modal" value="Yes">
+            </div>
+        </div>
+    </div>
+</div>
+
+

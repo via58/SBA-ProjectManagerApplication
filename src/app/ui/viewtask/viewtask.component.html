@@ -3,15 +3,17 @@
   <!-- First Row -->
   <div class="form-group form-inline">
     <label for="projectNameSearch">Project :</label>
-    <input type="text" class="form-control" id="projectNameSearch" placeholder="Project name">
+    <input type="text" class="form-control" id="projectNameSearch" placeholder="Project name" name="searchProjectName" [(ngModel)]='searchProjectName'>
+    <input type="button" class="btn btn-secondary" data-toggle="modal" href='#modal-ProjectOfViewTask' value="Search">
     <label for="">Sort task By :</label>
-    <button type="" class="btn btn-primary">Start date</button>
-    <button type="" class="btn btn-primary">End date</button>
-    <button type="" class="btn btn-primary">Priority</button>
-    <button type="" class="btn btn-primary">Completed</button>
+    <button type="" name='sortStartDate' (click)='toggleswitch(0)'  class="btn btn-primary">Start Date</button>
+    <button type="" name='sortEndDate' (click)='toggleswitch(1)' class="btn btn-primary">End Date</button>
+    <button type="" name='sortPriority' (click)='toggleswitch(2)'  class="btn btn-primary">Priority</button>
+    <button type="" name='sortCompleted' (click)='toggleswitch(3)'  class="btn btn-primary">Completed</button>
+    
   </div>
   <hr style="border-top:dotted 1px" />
-  <table class="table table-hover">
+  <table class="table table-hover"  >
     <thead>
       <tr>
         <th>Task</th>
@@ -21,28 +23,45 @@
         <th>End date</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let x of taskContainer |projectfilter:searchProjectName |tasksort:sortStartDate:sortEndDate:sortPriority:sortCompleted">
       <tr>
         <td>
-          <!-- <label>{{task.task}}</label> -->
-          <label>Task</label>
+          <label>{{x.task}}</label>
         </td>
         <td>
-          <!-- <label>{{task.parent_task}}</label> -->
-          <label>Parent task</label>
+          <label>{{x.parent_task}}</label>
         </td>
-        <td>1</td>
-        <td>2018-12-01</td>
-        <td>2018-12-07</td>
+        <td>{{x.priority}}</td>
+        <td>{{x.start_date}}</td>
+        <td>{{x.end_date}}</td>
         <td>
-          <button type="button" class="btn btn-default" (click)='handleUpdate(task.task_id)'>Edit</button>
+          <button type="button" *ngIf='x.status!="Completed"' class="btn btn-default" (click)='handleUpdateTask(x)'>Edit</button>
         </td>
         <td>
-          <button type="button" class="btn btn-default" (click)='removeTask(task.task_id)'>End Task</button>
+          <button type="button" *ngIf='x.status!="Completed"' class="btn btn-default" (click)='handleEndTask(x)'>End Task</button>
         </td>
         <td>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="modal fade" id="modal-ProjectOfViewTask">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Select Project Name</h4>
+      </div>
+      <div class="modal-body">
+          <input type="text" class="form-control" name="searchModalProject" [(ngModel)]='searchModalProject' placeholder="Search Project" >
+        <div class="list-group">
+          <a class="list-group-item " *ngFor='let x of projectList|projectfilter:searchModalProject' (click)="ViewTaskFilter(x)" data-dismiss="modal">{{x.project}}</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
