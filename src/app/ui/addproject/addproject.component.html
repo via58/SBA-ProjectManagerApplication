@@ -1,0 +1,76 @@
+<hr>
+<div class="container">
+  <form #newProjecDetails="ngForm" (ngSubmit)="handlesubmit()" role="form">
+    <!-- {{newProjecDetails.value |json}} -->
+    <div class="form-group form-inline">
+      <label for="txtproject" class="col10">Project</label>
+      <input type="text" class="form-control col70" id="txtproject" placeholder="Project Name" name="project" [(ngModel)]='newProject.project'
+        required>
+    </div>
+    <div class="form-group form-inline ">
+      <input type="checkbox" name="isChecked" [(ngModel)]='isChecked' (change)='isReadOnly(isChecked)'>
+      <label for="">Set Start and End date </label>
+      <input type="date" class="form-control" id="pstart" [readonly]='!check' placeholder="Start date" name="start_Date" [(ngModel)]='newProject.start_Date'  required>
+      <input type="date" class="form-control" id="pend"  [readonly]='!check' placeholder="End date" name="end_Date" [(ngModel)]='newProject.end_Date'  required>
+    </div>
+    <div class="form-group form-inline ">
+      <label class="col10" for="">Priority</label>
+      <span>{{newProjecDetails.value.priority}}</span>
+      <input type="range" class="form-control col70" name='priority'
+       value="0" min="0" max="30" id="" placeholder="Project Name" [(ngModel)]='newProject.priority' required>
+    </div>
+    <div class="form-group form-inline">
+      <label for="" class="col10">Manager</label>
+      <input type="text" class="form-control col70" id="" placeholder="Manager"
+      name='firstName' [(ngModel)]='newProject.firstName' required>
+      <input type="button" class="btn btn-secondary" data-toggle="modal" href='#modal-id' value="Search" >
+    </div>
+    <div class="form-group form-inline">
+      <button type="submit" id='btnadd' class="btn btn-primary">Add Project</button>
+     <input class="btn btn-primary" id='btnupdate' (click)='HandleUpdate()' value="Update Project" >
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </div>
+
+  </form>
+  <hr>
+  <app-viewproject></app-viewproject>
+</div>
+
+
+<div class="modal fade" id="modal-id">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Select Manager</h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a  class="list-group-item " *ngFor='let x of users' (click)="handleBox(x.firstName)" data-dismiss="modal" >{{x.firstName}}</a>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary"  id="SuccessModal" data-toggle="modal" href='#modal-success'>Trigger SuccessFull Modal</a>
+<div class="modal fade" id="modal-success"  >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>Project has Added</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

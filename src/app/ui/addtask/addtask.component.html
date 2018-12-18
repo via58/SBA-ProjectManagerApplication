@@ -1,0 +1,112 @@
+<div class="container">
+  <form #newTaskDetails="ngForm" (ngSubmit)="submitTask()">
+    <hr> 
+    <div class="form-group form-inline ">
+      <label for="project" class="col10">Project :</label>
+      <input type="text" readOnly class="form-control col70 " id="project" placeholder="Project Name"  name="project" [(ngModel)]='tasks.project'
+        required>
+      <input type="button" class="btn btn-secondary" data-toggle="modal" href='#ProjectModal' value="Search">
+    </div>
+    <div class="form-group form-inline ">
+      <label for="task" class="col10">Task :</label>
+      <input type="text" class="form-control col70 " id="task" name="task" [(ngModel)]="tasks.task" required>
+    </div>
+    <div class="form-group form-inline ">
+      <input type="checkbox" name="isChecked" [(ngModel)]='isChecked' (change)='isReadOnly(isChecked)'>
+      <label>Parent task </label>
+    </div>
+    <div class="form-group form-inline ">
+      <label for="priority" class="col10">Priority:</label>
+      <input type="range" class="form-control col70" id="priority" min="0" max="30" name="priority" [(ngModel)]="tasks.priority"
+        value="0" required>
+      <span>
+        {{newTaskDetails.value.priority}}
+      </span>
+    </div>
+    <div class="form-group form-inline">
+      <label for="parent_task" class="col10">Parent Task</label>
+      <input type="text" readOnly class="form-control col70" id="parent_task" name="parent_task" [(ngModel)]="tasks.parent_task"
+        required>
+      <input type="button" *ngIf='isChecked' id='modalParent' class="btn btn-secondary" data-toggle="modal" href='#modal-ParentTask' value="Search">
+    </div>
+    <div class="form-group form-inline">
+      <label for="startdate" class="col10">Start date</label>
+      <input type="date" class="form-control" id="startdate" name="start_date" [(ngModel)]="tasks.start_date" required>
+      <label for="end_date" class="col10">End date</label>
+      <input type="date" class="form-control" id="end_date" name="end_date" [(ngModel)]="tasks.end_date" required>
+    </div>
+
+    <div class="form-group form-inline">
+      <label for="user" class="col10">User</label>
+      <input type="text" class="form-control col70" readonly id="user" name="firstName" [(ngModel)]="tasks.firstName" required>
+      <input type="button" class="btn btn-secondary" data-toggle="modal" href='#modal-User' value="Search">
+    </div>
+
+    <div class="form-group" id="btndivision">
+      <button type="submit" class="btn btn-default">Add Task</button>
+      <button type="reset" class="btn btn-default">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<!-- ProjectModal -->
+<div class="modal fade" id="ProjectModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Select Project</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" name="searchModalProject" [(ngModel)]='searchModalProject' placeholder="Search Project" >
+        <div class="list-group">
+          <a class="list-group-item " *ngFor='let x of projectList |projectfilter:searchModalProject' (click)="handleProjectInput(x)" data-dismiss="modal">{{x.project}}</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ParentTaskModal -->
+<div class="modal fade" id="modal-ParentTask">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Select Parent Task</h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a class="list-group-item " *ngFor='let x of parentTask' (click)="handleParentInput(x)" data-dismiss="modal">{{x.parent_task}}</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UserModal -->
+
+<div class="modal fade" id="modal-User">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Select User</h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <a class="list-group-item " *ngFor='let x of users' (click)="handleUserInput(x)" data-dismiss="modal">{{x.firstName}}</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
