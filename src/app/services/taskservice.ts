@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../models/task';
 //import 'rxjs/add/operator/map';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,14 +23,14 @@ export class Taskservice {
   AddTask(newTaskDetails: Task): Observable<Task> {
     try {
       console.log(newTaskDetails);
-      return this._http.post<Task>(this._url, newTaskDetails);
+      return this._http.post<Task>(this._url, newTaskDetails,httpOptions);
     } catch (error) {
       console.error(error);
     }
   }
   UpdateTask(updateTaskDetails: Task): Observable<Task> {
     try {
-      return this._http.put<Task>(this._url + '/' + updateTaskDetails.task_id, updateTaskDetails);
+      return this._http.put<Task>(this._url + '/' + updateTaskDetails.task_id, updateTaskDetails,httpOptions);
 
     } catch (error) {
       console.error(error);

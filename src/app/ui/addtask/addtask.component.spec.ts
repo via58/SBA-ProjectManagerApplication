@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddtaskComponent } from './addtask.component';
+import { FormsModule } from '@angular/forms';
+import { Pipe } from '@angular/core';
 
 describe('AddtaskComponent', () => {
   let component: AddtaskComponent;
@@ -8,7 +10,8 @@ describe('AddtaskComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddtaskComponent ]
+      declarations: [ AddtaskComponent ],
+      imports:[FormsModule]
     })
     .compileComponents();
   }));

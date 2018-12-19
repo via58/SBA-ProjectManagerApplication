@@ -30,7 +30,7 @@ export class ProjectService {
   }
   UpdateProject(projectDetails: Project): Observable<Project> {
     try {
-      return this._http.put<Project>(this._url+'/'+projectDetails.project_id, projectDetails);
+      return this._http.put<Project>(this._url+'/'+projectDetails.project_id, projectDetails,httpOptions);
     } catch (error) {
       console.error(error);
     }
